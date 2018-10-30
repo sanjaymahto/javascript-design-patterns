@@ -1,0 +1,21 @@
+{
+  "name": "javascript-design-patterns",
+  "version": "1.0.0",
+  "description": "factory pattern",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sanjaymahto/javascript-design-patterns.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sanjaymahto/javascript-design-patterns/issues"
+  },
+  "homepage": "https://github.com/sanjaymahto/javascript-design-patterns#readme"
+}
