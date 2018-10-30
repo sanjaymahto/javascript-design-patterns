@@ -1,13 +1,29 @@
-const gadgetFactory = require("./gadgetFactory");
-const myLaptop = gadgetFactory.createGadget("Laptop", {
-    ram: 8,
-    ssd: 256,
-    name: "Sanjay's MacBook Pro"
-});
-const myTablet = gadgetFactory.createGadget("Tablet", {
-    ram: 4,
-    hdd: 128,
-    name: "Sanjay's iPad"
-});
-console.log(myLaptop);
-console.log(myTablet);
+var Exposer = (function() {
+    var privateVariable = 10;
+  
+    var privateMethod = function() {
+      console.log('Inside a private method!');
+      privateVariable++;
+    }
+  
+    var methodToExpose = function() {
+      console.log('This is a method I want to expose!');
+    }
+  
+    var otherMethodIWantToExpose = function() {
+      privateMethod();
+    }
+  
+    return {
+        first: methodToExpose,
+        second: otherMethodIWantToExpose
+    };
+  })();
+  
+  Exposer.first();        // Output: This is a method I want to expose!
+  Exposer.second();       // Output: Inside a private method!
+  try {
+      Exposer.privateMethod(); // undefined - Can't Access Directly from Outside.
+} catch(e) {
+    console.log('error: ', e.message);
+} 
