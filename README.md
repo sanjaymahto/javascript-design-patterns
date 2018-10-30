@@ -1,6 +1,6 @@
 # javascript-design-patterns - Module Revealing Pattern
 
-### What is the Factory Pattern?
+### What is the Module Revealing Pattern?
 ### In its most basic incarnation the module pattern hides the module’s variables and functions making only what’s necessary accessible to the outside world.
 
 ### When Should We Use It?
