@@ -1,29 +1,47 @@
-var Exposer = (function() {
-    var privateVariable = 10;
+var singleton = (function(){
+
+  var instance; // defining instance variable
   
-    var privateMethod = function() {
-      console.log('Inside a private method!');
-      privateVariable++;
+  function init(){
+    
+    var name;
+    
+    this.setName = function(name){
+      this.name = name;
     }
-  
-    var methodToExpose = function() {
-      console.log('This is a method I want to expose!');
+    
+    this.getName = function(){
+      return this.name;
     }
-  
-    var otherMethodIWantToExpose = function() {
-      privateMethod();
+    
+    return{
+      setName:setName,
+      getName:getName
     }
+      
+  }
   
-    return {
-        first: methodToExpose,
-        second: otherMethodIWantToExpose
-    };
-  })();
+  function getInstance(){
+    
+    if(!instance){
+      instance = init();
+    }
+    
+    return instance;
+  }
+    
+  return{
+    getInstance:getInstance
+  }  
   
-  Exposer.first();        // Output: This is a method I want to expose!
-  Exposer.second();       // Output: Inside a private method!
-  try {
-      Exposer.privateMethod(); // undefined - Can't Access Directly from Outside.
-} catch(e) {
-    console.log('error: ', e.message);
-} 
+})();
+
+
+var one = singleton.getInstance();
+var two = singleton.getInstance();
+
+//the two instance are same
+console.log(one == two) //true
+
+one.setName('Sanjay');
+console.log(two.getName()); //"Sanjay"
