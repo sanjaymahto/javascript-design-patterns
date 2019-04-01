@@ -1,47 +1,56 @@
-let Mortgage = (name) => {
-    this.name = name;
+function Click() {
+    this.handlers = [];  // observers
 }
  
-Mortgage.prototype = {
+Click.prototype = {
  
-    applyFor: function(amount) {
-        // access multiple subsystems...
-        var result = "approved";
-        if (!new Bank().verify(this.name, amount)) {
-            result = "denied";
-        } else if (!new Credit().get(this.name)) {
-            result = "denied";
-        } else if (!new Background().check(this.name)) {
-            result = "denied";
-        }
-        return this.name + " has been " + result +
-               " for a " + amount + " mortgage";
+    subscribe: function(fn) {
+        this.handlers.push(fn);
+    },
+ 
+    unsubscribe: function(fn) {
+        this.handlers = this.handlers.filter(
+            function(item) {
+                if (item !== fn) {
+                    return item;
+                }
+            }
+        );
+    },
+ 
+    fire: function(o, thisObj) {
+        var scope = thisObj || window;
+        this.handlers.forEach(function(item) {
+            item.call(scope, o);
+        });
     }
 }
  
-var Bank = function() {
-    this.verify = function(name, amount) {
-        // complex logic ...
-        return true;
-    }
-}
+// log helper
  
-var Credit = function() {
-    this.get = function(name) {
-        // complex logic ...
-        return true;
-    }
-}
+var log = (function() {
+    var log = "";
  
-var Background = function() {
-    this.check = function(name) {
-        // complex logic ...
-        return true;
+    return {
+        add: function(msg) { log += msg + "\n"; },
+        show: function() { alert(log); log = ""; }
     }
-}
+})();
  
 function run() {
-    var mortgage = new Mortgage("Joan Templeton");
-    var result = mortgage.applyFor("$100,000");
-    console.log(result);
+ 
+    var clickHandler = function(item) { 
+        log.add("fired: " + item); 
+    };
+ 
+    var click = new Click();
+ 
+    click.subscribe(clickHandler);
+    click.fire('event #1');
+    click.unsubscribe(clickHandler);
+    click.fire('event #2');
+    click.subscribe(clickHandler);
+    click.fire('event #3');
+ 
+    log.show();
 }

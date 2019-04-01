@@ -1,9 +1,9 @@
-# Facade Design pattern
+# Observer Design pattern
 
-## What is Facade Pattern
-### Provide a unified interface to a set of interfaces in a subsystem. Façade defines a higher-level interface that makes the subsystem easier to use.
+## What is Observer Pattern
+### Define a one-to-many dependency between objects so that when one object changes state, all its dependents are notified and updated automatically.
 
-## Advantage of Facade Pattern
-### The Façade pattern provides an interface which shields clients from complex functionality in one or more subsystems. It is a simple pattern that may seem trivial but it is powerful and extremely useful. It is often present in systems that are built around a multi-layer architecture.
-###The intent of the Façade is to provide a high-level interface (properties and methods) that makes a subsystem or toolkit easy to use for the client.
+## Advantage of Observer Pattern
+### The Observer pattern offers a subscription model in which objects subscribe to an event and get notified when the event occurs. This pattern is the cornerstone of event driven programming, including JavaScript. The Observer pattern facilitates good object-oriented design and promotes loose coupling.
+### When building web apps you end up writing many event handlers. Event handlers are functions that will be notified when a certain event fires. These notifications optionally receive an event argument with details about the event (for example the x and y position of the mouse at a click event).
    
